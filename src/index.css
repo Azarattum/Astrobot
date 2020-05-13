@@ -1,9 +1,12 @@
 /* Core styles */
 :root {
-    --color-text: rgb(0, 0, 0);
+	--color-text: rgb(0, 0, 0);
 }
 
 body {
-    margin: 0;
-    color: var(--color-text);
+	margin: 0;
+	color: var(--color-text);
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
 }

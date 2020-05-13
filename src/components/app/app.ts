@@ -1,5 +1,7 @@
 import Manager, { IComponent, ComponentArgs } from "../common/manager.class";
 import EnvetsHandler from "./events";
+import Game from "./controllers/game.controller";
+import Mouse from "./controllers/mouse.controller";
 
 /**
  * Main application class
@@ -12,9 +14,7 @@ export default class App {
 	 * Initializes the app
 	 */
 	public async initialize(): Promise<void> {
-		const components: IComponent[] = [
-			///Add your new components here
-		];
+		const components: IComponent[] = [new Game(), new Mouse()];
 
 		this.manger = new Manager(components);
 		this.events = new EnvetsHandler(components);
