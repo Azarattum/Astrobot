@@ -37,13 +37,17 @@ export default class Scene {
 		const destroyed = [];
 
 		//Tick all objects
-		for (const object of this.objects) {
+		for (const i in this.objects) {
+			const object = this.objects[i];
 			if (object instanceof PhysicalObject) {
 				object.tick();
 				//Check for collisions
-				for (const colided of this.objects) {
-					if (!(colided instanceof PhysicalObject)) continue;
-					if (this.areColided(object, colided)) {
+				for (let j = +i + 1; j < this.objects.length; j++) {
+					const colided = this.objects[j];
+					if (!(colided instanceof PhysicalObject)) {
+						continue;
+					}
+					if (RenderObject.areColided(object, colided)) {
 						object.colided(colided);
 					}
 				}
@@ -52,30 +56,21 @@ export default class Scene {
 				object.destroy();
 			}
 			if (object.destroyed) {
-				destroyed.push(this.objects.indexOf(object));
+				destroyed.push(object);
 			}
 		}
 
 		for (const object of destroyed) {
-			this.objects.splice(object, 1);
+			this.objects.splice(this.objects.indexOf(object), 1);
 		}
-	}
-
-	private areColided(object1: RenderObject, object2: RenderObject): boolean {
-		return !(
-			object1.y + object1.height < object2.y ||
-			object1.y > object2.y + object2.height ||
-			object1.x + object1.width < object2.x ||
-			object1.x > object2.x + object2.width
-		);
 	}
 
 	private isOutOfScene(object: RenderObject): boolean {
 		return (
-			object.x + object.width < 0 ||
-			object.y + object.height < 0 ||
-			object.x > this.width ||
-			object.y > this.height
+			object.x + object.width < -50 ||
+			object.y + object.height < -50 ||
+			object.x > this.width + 50 ||
+			object.y > this.height + 50
 		);
 	}
 }

@@ -24,7 +24,4 @@ export default class Bullet extends PhysicalObject {
 			Math.sin(direction) * speed
 		]);
 	}
-
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	public colided(): void {}
 }

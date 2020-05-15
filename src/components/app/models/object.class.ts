@@ -1,17 +1,17 @@
 /**
  * Represents some example model
  */
-export default abstract class RenderObject {
+export default class RenderObject {
 	public destroyed: boolean;
 	public autoDestroy: boolean;
 	public size: number[];
 	public position: number[];
-	protected color: number[];
+	public color: number[];
 
 	public constructor() {
 		this.position = [0, 0];
 		this.size = [1, 1];
-		this.color = [0, 0, 0, 1];
+		this.color = [255, 255, 255, 1];
 		this.destroyed = false;
 		this.autoDestroy = false;
 	}
@@ -61,5 +61,17 @@ export default abstract class RenderObject {
 
 	public destroy(): void {
 		this.destroyed = true;
+	}
+
+	public static areColided(
+		object1: RenderObject,
+		object2: RenderObject
+	): boolean {
+		return !(
+			object1.y + object1.height < object2.y ||
+			object1.y > object2.y + object2.height ||
+			object1.x + object1.width < object2.x ||
+			object1.x > object2.x + object2.width
+		);
 	}
 }

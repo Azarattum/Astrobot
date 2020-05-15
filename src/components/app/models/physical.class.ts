@@ -3,15 +3,20 @@ import RenderObject from "./object.class";
 /**
  * Represents some example model
  */
-export default abstract class PhysicalObject extends RenderObject {
-	protected acceleration: number[];
-	protected velocity: number[];
+export default class PhysicalObject extends RenderObject {
+	public acceleration: number[];
+	public velocity: number[];
+	public solid: boolean;
 	public forces: number[][];
 	public mass: number;
 	public friction: number;
+	public bounciness: number;
 
 	public constructor() {
 		super();
+
+		this.bounciness = 1;
+		this.solid = false;
 		this.mass = 1;
 		this.friction = 0.1;
 		this.acceleration = [0, 0];
@@ -19,12 +24,38 @@ export default abstract class PhysicalObject extends RenderObject {
 		this.forces = [];
 	}
 
-	abstract colided(object: PhysicalObject): void;
+	public colided(object: PhysicalObject): void {
+		if (this.solid && object.solid) {
+			const newVelocity = this.getCollisionVelocity(object);
+			const objectVelocity = object.getCollisionVelocity(this);
+
+			object.velocity = objectVelocity;
+			this.velocity = newVelocity;
+		}
+	}
+
+	private getCollisionVelocity(colided: PhysicalObject): number[] {
+		if (!Number.isFinite(this.mass)) {
+			return this.velocity.slice();
+		}
+
+		const elasticity = this.bounciness * colided.bounciness;
+		const colidedMass = Number.isFinite(colided.mass)
+			? colided.mass
+			: Math.sign(colided.mass) * Number.MAX_SAFE_INTEGER;
+
+		return this.velocity.map((value, axis) => {
+			return (
+				value -
+				(1 + elasticity) *
+					(colidedMass / (colidedMass + this.mass)) *
+					(value - colided.velocity[axis])
+			);
+		});
+	}
 
 	public get speed(): number {
-		return Math.sqrt(
-			Math.pow(this.velocity[0], 2) + Math.pow(this.velocity[1], 2)
-		);
+		return Math.sqrt(this.velocity.reduce((a, b) => a + b * b, 0));
 	}
 
 	public tick(): void {

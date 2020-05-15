@@ -20,11 +20,15 @@ export default class Asteroid extends PhysicalObject {
 			Math.random() * maxVelocity * 2 - maxVelocity,
 			Math.random() * maxVelocity * 2 - maxVelocity
 		];
-		this.mass = 30;
+		this.mass = (this.size[0] + this.size[1]) / 2;
+		this.friction = 0;
+		this.bounciness = 0.2;
 		this.autoDestroy = true;
+		this.solid = true;
 	}
 
 	public colided(object: PhysicalObject): void {
+		super.colided(object);
 		if (object instanceof Bullet) {
 			this.destroy();
 		}
