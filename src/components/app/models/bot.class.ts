@@ -1,4 +1,3 @@
-import PhysicalObject from "./physical.class";
 import Player from "./player.class";
 import NeuralNetwork from "./network.class";
 import Scene from "./scene.class";
@@ -13,6 +12,7 @@ export default class Bot extends Player {
 	private callback: Function;
 	public brain: NeuralNetwork;
 	public poiter: RenderObject;
+	public visuals: RenderObject[];
 	public fitness: number;
 	public best: number;
 
@@ -34,6 +34,11 @@ export default class Bot extends Player {
 		this.poiter = new RenderObject();
 		this.poiter.size = [40, 40];
 		this.poiter.color = [0, 0, 255, 0.4];
+		this.visuals = new Array(100).fill(0).map(x => {
+			const fill = new RenderObject();
+			fill.size = [40, 40];
+			return fill;
+		});
 	}
 
 	public copy(): Bot {
@@ -65,12 +70,14 @@ export default class Bot extends Player {
 		const x = this.x - viewSize / 2 + cellX * cellSize;
 		const y = this.y - viewSize / 2 + cellY * cellSize;*/
 
-		const [mx, my, speed] = this.brain.predict(view);
+		const direction = this.brain.predict(view);
+		const angle = ((2 * Math.PI) / 8) * direction;
+		const speed = 100;
 
-		const x = this.x + mx * speed * 400 + this.size[0] / 2;
-		const y = this.y + my * speed * 400 + this.size[1] / 2;
+		const x = this.x + Math.cos(angle) * speed + this.size[0] / 2;
+		const y = this.y + Math.sin(angle) * speed + this.size[1] / 2;
 
-		this.poiter.position = [x, y];
+		this.poiter.position = [x - 20, y - 20];
 		this.move(x, y);
 
 		super.tick();
@@ -79,6 +86,7 @@ export default class Bot extends Player {
 	public destroy(): void {
 		super.destroy();
 		this.poiter.destroy();
+		this.visuals.forEach(x => x.destroy());
 		this.callback();
 	}
 
@@ -93,25 +101,57 @@ export default class Bot extends Player {
 				const cell = new RenderObject();
 				cell.position = [x, y];
 				cell.size = [cellSize, cellSize];
-				let colided = false;
+				let maxSpeed = -26;
 				for (const object of this.scene.objects) {
 					if (!(object instanceof Asteroid)) continue;
 					if (RenderObject.areColided(object, cell)) {
-						colided = true;
-						break;
+						const distanceVector = this.position.map(
+							(value, axis) => {
+								return value - object.position[axis];
+							}
+						);
+						const distance = Math.sqrt(
+							distanceVector.reduce((a, b) => a + b * b, 0)
+						);
+						const relativeSpeed =
+							object.velocity
+								.map((value, axis) => {
+									return value - this.velocity[axis];
+								})
+								.reduce((a, b, axis) => {
+									return a + b * distanceVector[axis];
+								}, 0) / distance;
+
+						if (maxSpeed < relativeSpeed) maxSpeed = relativeSpeed;
 					}
 				}
 
-				if (
-					x < 0 ||
-					y < 0 ||
-					x > this.scene.width ||
-					y > this.scene.height
-				) {
-					colided = true;
+				if (x < 0) {
+					maxSpeed = Math.max(maxSpeed, -this.velocity[0]);
+				}
+				if (y < 0) {
+					maxSpeed = Math.max(maxSpeed, -this.velocity[1]);
+				}
+				if (x > this.scene.width) {
+					maxSpeed = Math.max(maxSpeed, this.velocity[0]);
+				}
+				if (y > this.scene.height) {
+					maxSpeed = Math.max(maxSpeed, this.velocity[1]);
 				}
 
-				result.push(colided ? 1 : 0);
+				const speedNormalize = 26;
+				const danger = maxSpeed / speedNormalize;
+
+				const visual = this.visuals[j / cellSize + (i * 10) / cellSize];
+				if (visual) {
+					visual.position = [x, y];
+					visual.color =
+						danger > 0
+							? [255 * danger, 0, 0, 0.5]
+							: [0, 255 * -danger, 0, 0.3];
+				}
+
+				result.push((danger + 1) / 2);
 			}
 		}
 

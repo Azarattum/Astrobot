@@ -48,6 +48,17 @@ export default class Game extends Controller<"">() {
 		this.expose("speedup", (x: number) => {
 			this.cycles = x;
 		});
+
+		this.expose("tick", (x: number) => {
+			const temp = this.cycles;
+			this.cycles = x || 1;
+			this.tick();
+			this.cycles = temp;
+		});
+
+		this.expose("visualize", (x: boolean) => {
+			population.visualize = x;
+		});
 	}
 
 	public shoot(): void {

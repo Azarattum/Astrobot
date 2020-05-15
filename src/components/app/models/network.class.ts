@@ -1,14 +1,15 @@
 import * as tf from "@tensorflow/tfjs";
 export default class NeuralNetwork {
 	private model: tf.Sequential;
+	private gaussianPrevious: number | null;
 
 	public constructor() {
+		this.gaussianPrevious = null;
 		tf.setBackend("cpu");
 
 		const inputUnits = 100;
-		const hiddenUnits = 30;
-		const hidden2Units = 7;
-		const outputUnits = 3;
+		const hiddenUnits = 35;
+		const outputUnits = 8;
 
 		this.model = new tf.Sequential();
 		const hidden = tf.layers.dense({
@@ -17,41 +18,44 @@ export default class NeuralNetwork {
 			activation: "sigmoid"
 		});
 
-		const hidden2 = tf.layers.dense({
-			units: hidden2Units,
-			activation: "tanh"
-		});
-
 		const output = tf.layers.dense({
-			// inputShape: [inputUnits],
 			units: outputUnits,
-			activation: "tanh"
+			activation: "sigmoid"
 		});
 
 		this.model.add(hidden);
-		this.model.add(hidden2);
 		this.model.add(output);
 	}
 
-	public predict(data: number[]): number[] {
+	public predict(data: number[]): number {
 		const xs = tf.tensor2d([data]);
 		const ys = this.model.predict(xs) as tf.Tensor1D;
 		const result = ys.dataSync();
 		const index = result.indexOf(Math.max(...result));
+
 		tf.dispose(xs);
 		tf.dispose(ys);
-		return Array.from(result); //index; //
+
+		return index;
 	}
 
 	private gaussianRandom(): number {
-		let u = 0;
-		let v = 0;
-		while (u === 0) u = Math.random();
-		while (v === 0) v = Math.random();
+		let y1, x1, x2, w;
+		if (this.gaussianPrevious != null) {
+			y1 = this.gaussianPrevious;
+			this.gaussianPrevious = null;
+		} else {
+			do {
+				x1 = Math.random() * 2 - 1;
+				x2 = Math.random() * 2 - 1;
+				w = x1 * x1 + x2 * x2;
+			} while (w >= 1);
+			w = Math.sqrt((-2 * Math.log(w)) / w);
+			y1 = x1 * w;
+			this.gaussianPrevious = x2 * w;
+		}
 
-		return (
-			(Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v)) / 3
-		);
+		return y1;
 	}
 
 	public mutate(rate: number): void {

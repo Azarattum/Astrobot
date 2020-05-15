@@ -5,6 +5,7 @@ export default class Population {
 	private generation: Bot[];
 	public scene: Scene;
 	public size: number;
+	public visualize: boolean = false;
 
 	public readonly MUTATION_RATE = 0.05;
 
@@ -58,6 +59,11 @@ export default class Population {
 		for (const bot of this.generation) {
 			scene.objects.push(bot);
 			scene.objects.push(bot.poiter);
+			if (this.visualize) {
+				scene.objects.push(...bot.visuals);
+			} else {
+				bot.visuals = [];
+			}
 		}
 	}
 
