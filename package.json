@@ -5,7 +5,9 @@
 		"build": "node_modules/.bin/webpack-cli -d --progress",
 		"watch": "node_modules/.bin/webpack-cli -d -w"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"@tensorflow/tfjs": "^1.7.4"
+	},
 	"devDependencies": {
 		"@babel/compat-data": "^7.9.6",
 		"@typescript-eslint/eslint-plugin": "^2.24.0",
