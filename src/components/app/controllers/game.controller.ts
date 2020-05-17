@@ -36,6 +36,7 @@ export default class Game extends Controller<"">() {
 		this.scene = scene;
 
 		const population = new Population(50, scene);
+		await population.load("assets/model_9174.json");
 		population.populate(scene);
 
 		this.render();

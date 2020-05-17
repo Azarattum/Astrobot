@@ -20,23 +20,27 @@ export default class NeuralNetwork {
 
 		const output = tf.layers.dense({
 			units: outputUnits,
-			activation: "sigmoid"
+			activation: "softmax"
 		});
 
 		this.model.add(hidden);
 		this.model.add(output);
 	}
 
-	public predict(data: number[]): number {
+	public async load(url: string): Promise<void> {
+		this.model = (await tf.loadLayersModel(url)) as tf.Sequential;
+	}
+
+	public predict(data: number[]): number[] {
 		const xs = tf.tensor2d([data]);
 		const ys = this.model.predict(xs) as tf.Tensor1D;
 		const result = ys.dataSync();
-		const index = result.indexOf(Math.max(...result));
+		//const index = result.indexOf(Math.max(...result));
 
 		tf.dispose(xs);
 		tf.dispose(ys);
 
-		return index;
+		return Array.from(result);
 	}
 
 	private gaussianRandom(): number {

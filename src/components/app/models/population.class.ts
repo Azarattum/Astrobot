@@ -1,5 +1,6 @@
 import Bot from "./bot.class";
 import Scene from "./scene.class";
+import NeuralNetwork from "./network.class";
 
 export default class Population {
 	private generation: Bot[];
@@ -12,11 +13,20 @@ export default class Population {
 	public constructor(size: number, scene: Scene) {
 		this.size = size;
 		this.scene = scene;
+
 		this.generation = new Array(size).fill(null).map(x => {
 			const bot = new Bot(scene, this.update.bind(this));
 			bot.x = scene.width / 2 - 5;
 			bot.y = scene.height / 2 - 5;
 			return bot;
+		});
+	}
+
+	public async load(url: string): Promise<void> {
+		const model = new NeuralNetwork();
+		await model.load(url);
+		this.generation.forEach(x => {
+			x.brain = model.copy();
 		});
 	}
 
@@ -34,8 +44,12 @@ export default class Population {
 
 	public nextGeneration(): Bot[] {
 		console.count("Generation");
-		const bestScore = Math.max(...this.generation.map(x => x.fitness));
-		console.log("Best score:", bestScore);
+		const roundScore = Math.max(...this.generation.map(x => x.fitness));
+		const gameScore = Math.max(
+			...this.generation.map(x => x.best),
+			roundScore
+		);
+		console.log("Best score:", roundScore);
 
 		const generation = new Array(this.size - 2).fill(null).map(x => {
 			const bot = this.pool().copy();
@@ -43,11 +57,13 @@ export default class Population {
 			return bot;
 		});
 
-		const topScore = Math.max(...this.generation.map(x => x.best));
-		const top = this.generation.find(x => x.best >= topScore);
-		const best = this.generation.find(x => x.best >= bestScore);
-		if (top) generation.push(top.copy());
-		if (best) generation.push(best.copy());
+		const roundBest = this.generation.find(x => x.fitness >= roundScore);
+		const gameBest = this.generation.find(
+			x => Math.max(x.fitness, x.best) >= gameScore
+		);
+
+		if (roundBest) generation.push(roundBest.copy());
+		if (gameBest) generation.push(gameBest.copy());
 
 		return generation;
 	}

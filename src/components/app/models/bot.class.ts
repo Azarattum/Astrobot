@@ -49,6 +49,7 @@ export default class Bot extends Player {
 	}
 
 	public mutate(rate: number): void {
+		this.best = 0;
 		this.brain.mutate(rate);
 	}
 
@@ -70,12 +71,21 @@ export default class Bot extends Player {
 		const x = this.x - viewSize / 2 + cellX * cellSize;
 		const y = this.y - viewSize / 2 + cellY * cellSize;*/
 
-		const direction = this.brain.predict(view);
-		const angle = ((2 * Math.PI) / 8) * direction;
-		const speed = 100;
+		const prediction = this.brain.predict(view);
+		const velocity = [0, 0];
 
-		const x = this.x + Math.cos(angle) * speed + this.size[0] / 2;
-		const y = this.y + Math.sin(angle) * speed + this.size[1] / 2;
+		for (let i = 0; i < prediction.length; i++) {
+			const value = prediction[i];
+			const angle = ((2 * Math.PI) / prediction.length) * i;
+			velocity[0] += Math.cos(angle) * value;
+			velocity[1] += Math.sin(angle) * value;
+		}
+
+		// const angle = ((2 * Math.PI) / 8) * direction;
+		const speed = 400;
+
+		const x = this.x + velocity[0] * speed + this.size[0] / 2;
+		const y = this.y + velocity[1] * speed + this.size[1] / 2;
 
 		this.poiter.position = [x - 20, y - 20];
 		this.move(x, y);
