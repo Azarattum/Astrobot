@@ -1,27 +1,8 @@
-# The Framework [BROWSER]
-For easy development of js/ts applications.
+# Astrobot
+Machine learning experiment to teach an AI to play game with asteroids.
 
-This is **browser** branch. Check [**node**](https://github.com/Azarattum/TheFramework/tree/node) for NodeJS development.
-
-## Features & Technologies:
-  - Uses **Typescript**
-  - Bundles with **Webpack**
-  - Preconfigured **ESList**
-  - Preconfigured **Prettier**
-  - Uses **Sass** as css preprocessor
-  - Uses **Pug** for HTML templates
-  - Preconfigured WebWorkers for Webpack
-  - Preconfigured ServiceWorker from **Workbox Plugin**
-  - Preconfigured GL Shaders loader
-  - Preconfigured **Chrome Debugger**
-  - Controller scopes
-  - 2-Way data binding
-  - Event-driven
-  - Strict naming and hierarchy
-  - Lightweight
-
-### Usage:
-Clone this repo and start developing your website.
+### Demo:
+https://azarattum.github.io/Astrobot/
 
 ### Installation: 
 Install all dependencies:
