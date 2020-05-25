@@ -3,6 +3,7 @@ import Scene from "../models/scene.class";
 import Player from "../models/player.class";
 import Asteroid from "../models/asteroid.class";
 import Population from "../models/population.class";
+import Bot from "../models/bot.class";
 
 /**
  * Game Controller
@@ -35,12 +36,37 @@ export default class Game extends Controller<"">() {
 		const scene = new Scene(this.context);
 		this.scene = scene;
 
-		const population = new Population(50, scene);
-		await population.load("assets/model_9174.json");
-		population.populate(scene);
+		// const population = new Population(60, scene);
+		// await population.load("assets/model_cc_12k.json");
+		// population.populate(scene);
+
+		const bot0 = new Bot(scene);
+		bot0.brain.load("assets/model_cc_6000.json");
+		bot0.color = [234, 241, 254];
+
+		const bot1 = new Bot(scene);
+		bot1.brain.load("assets/model_cc_10k.json");
+		bot1.color = [142, 1, 42];
+
+		const bot2 = new Bot(scene);
+		bot2.brain.load("assets/model_cc_12k.json");
+		bot2.color = [152, 157, 23];
+
+		const bot3 = new Bot(scene);
+		bot3.brain.load("assets/model_cc_5k_lastgen.json");
+		bot3.color = [42, 7, 223];
+
+		this.player = new Player();
+		this.player.position = [canvas.width / 2, canvas.height / 2];
+
+		this.scene.objects.push(bot0);
+		this.scene.objects.push(bot1);
+		this.scene.objects.push(bot2);
+		this.scene.objects.push(bot3);
+		this.scene.objects.push(this.player);
 
 		this.render();
-		setInterval(this.tick.bind(this), 25);
+		setInterval(this.tick.bind(this), 30);
 
 		this.expose("render", () => {
 			this.scene?.render();

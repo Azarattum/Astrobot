@@ -8,13 +8,38 @@ export default class NeuralNetwork {
 		tf.setBackend("cpu");
 
 		const inputUnits = 100;
-		const hiddenUnits = 35;
-		const outputUnits = 8;
+		const convFilters = 4;
+		const convFilters2 = 4;
+		const hiddenUnits = 16;
+		const hiddenUnits2 = 8;
+		// const outputUnits = 8;
+		const outputUnits = 4;
 
 		this.model = new tf.Sequential();
+		const convolutional = tf.layers.conv2d({
+			inputShape: [Math.sqrt(inputUnits), Math.sqrt(inputUnits), 1],
+			filters: convFilters,
+			kernelSize: 3
+		});
+
+		const pooling = tf.layers.averagePooling2d({ poolSize: 2 });
+
+		const convolutional2 = tf.layers.conv2d({
+			filters: convFilters2,
+			kernelSize: 2
+		});
+
+		const flatten = tf.layers.flatten({});
+
 		const hidden = tf.layers.dense({
-			inputShape: [inputUnits],
+			// inputShape: [inputUnits],
 			units: hiddenUnits,
+			activation: "sigmoid"
+		});
+
+		const hidden2 = tf.layers.dense({
+			// inputShape: [inputUnits],
+			units: hiddenUnits2,
 			activation: "sigmoid"
 		});
 
@@ -23,8 +48,15 @@ export default class NeuralNetwork {
 			activation: "softmax"
 		});
 
+		this.model.add(convolutional);
+		this.model.add(pooling);
+		this.model.add(convolutional2);
+		this.model.add(flatten);
 		this.model.add(hidden);
+		this.model.add(hidden2);
 		this.model.add(output);
+
+		// console.log(flatten.outputShape);
 	}
 
 	public async load(url: string): Promise<void> {
@@ -32,7 +64,12 @@ export default class NeuralNetwork {
 	}
 
 	public predict(data: number[]): number[] {
-		const xs = tf.tensor2d([data]);
+		// console.log();
+		// const xs = tf.tensor(data, [1, 100]);
+		const xs = tf.tensor(
+			data,
+			this.model.inputs[0].shape.map(x => (x ? x : 1))
+		);
 		const ys = this.model.predict(xs) as tf.Tensor1D;
 		const result = ys.dataSync();
 		//const index = result.indexOf(Math.max(...result));

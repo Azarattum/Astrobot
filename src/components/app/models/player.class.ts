@@ -72,7 +72,7 @@ export default class Player extends PhysicalObject {
 			Math.sqrt(Math.pow(this.size[0], 2) + Math.pow(this.size[1], 2)) /
 			1.25;
 
-		context.strokeStyle = "white";
+		context.strokeStyle = this.fill;
 		context.lineWidth = length / 4;
 
 		context.beginPath();

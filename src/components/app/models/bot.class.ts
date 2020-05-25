@@ -9,7 +9,7 @@ import Asteroid from "./asteroid.class";
  */
 export default class Bot extends Player {
 	private scene: Scene;
-	private callback: Function;
+	public callback: Function | undefined;
 	public brain: NeuralNetwork;
 	public poiter: RenderObject;
 	public visuals: RenderObject[];
@@ -18,7 +18,7 @@ export default class Bot extends Player {
 
 	public constructor(
 		scene: Scene,
-		callback: Function,
+		callback?: Function,
 		brain?: NeuralNetwork
 	) {
 		super();
@@ -58,14 +58,14 @@ export default class Bot extends Player {
 			this.fitness++;
 		}
 
-		const viewSize = 400;
-		const cellSize = 40;
+		const viewSize = 500;
+		const cellSize = 50;
 
 		const view = this.getView(viewSize, cellSize);
 
-		/*const index = this.brain.predict(view);
+		const index = this.brain.predict(view);
 
-		const cellX = index % (viewSize / cellSize);
+		/*const cellX = index % (viewSize / cellSize);
 		const cellY = Math.floor(index / (viewSize / cellSize));
 
 		const x = this.x - viewSize / 2 + cellX * cellSize;
@@ -82,7 +82,7 @@ export default class Bot extends Player {
 		}
 
 		// const angle = ((2 * Math.PI) / 8) * direction;
-		const speed = 400;
+		const speed = 200;
 
 		const x = this.x + velocity[0] * speed + this.size[0] / 2;
 		const y = this.y + velocity[1] * speed + this.size[1] / 2;
@@ -97,11 +97,12 @@ export default class Bot extends Player {
 		super.destroy();
 		this.poiter.destroy();
 		this.visuals.forEach(x => x.destroy());
-		this.callback();
+		this.callback?.call(this, this);
 	}
 
 	private getView(viewSize: number, cellSize: number): number[] {
-		const result = [];
+		const result = new Array(Math.pow(viewSize / cellSize, 2)).fill(0);
+		const count = viewSize / cellSize;
 
 		for (let i = 0; i < viewSize; i += cellSize) {
 			for (let j = 0; j < viewSize; j += cellSize) {
@@ -112,6 +113,7 @@ export default class Bot extends Player {
 				cell.position = [x, y];
 				cell.size = [cellSize, cellSize];
 				let maxSpeed = -26;
+				let velocity = [0, 0];
 				for (const object of this.scene.objects) {
 					if (!(object instanceof Asteroid)) continue;
 					if (RenderObject.areColided(object, cell)) {
@@ -131,6 +133,10 @@ export default class Bot extends Player {
 								.reduce((a, b, axis) => {
 									return a + b * distanceVector[axis];
 								}, 0) / distance;
+
+						velocity = velocity.map((value, axis) => {
+							return value + object.velocity[axis];
+						});
 
 						if (maxSpeed < relativeSpeed) maxSpeed = relativeSpeed;
 					}
@@ -152,16 +158,39 @@ export default class Bot extends Player {
 				const speedNormalize = 26;
 				const danger = maxSpeed / speedNormalize;
 
-				const visual = this.visuals[j / cellSize + (i * 10) / cellSize];
-				if (visual) {
-					visual.position = [x, y];
-					visual.color =
-						danger > 0
-							? [255 * danger, 0, 0, 0.5]
-							: [0, 255 * -danger, 0, 0.3];
+				let index =
+					((i / cellSize) * viewSize) / cellSize + j / cellSize;
+				result[index] += (danger + 1) / 2;
+				result[index] = Math.min(result[index], 1);
+
+				if (velocity[0] > 0 && (index % count) + 1 < count) {
+					index++;
+				}
+				if (velocity[0] < 0 && (index % count) - 1 >= 0) {
+					index--;
 				}
 
-				result.push((danger + 1) / 2);
+				if (velocity[1] > 0 && index + count < Math.pow(count, 2)) {
+					index += count;
+				}
+				if (velocity[1] < 0 && index - count >= 0) {
+					index -= count;
+				}
+
+				result[index] += (danger + 1) / 4;
+				result[index] = Math.min(result[index], 1);
+			}
+		}
+
+		if (this.visuals.length) {
+			for (let i = 0; i < Math.pow(count, 2); i++) {
+				const x = this.x - viewSize / 2 + (i % count) * cellSize;
+				const y =
+					this.y - viewSize / 2 + Math.floor(i / count) * cellSize;
+
+				const danger = result[i];
+				this.visuals[i].position = [x, y];
+				this.visuals[i].color = [255 * danger, 0, 0, 0.5];
 			}
 		}
 

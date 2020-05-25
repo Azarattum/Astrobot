@@ -11,9 +11,12 @@ export default class PhysicalObject extends RenderObject {
 	public mass: number;
 	public friction: number;
 	public bounciness: number;
+	protected currentTick: number;
 
 	public constructor() {
 		super();
+
+		this.currentTick = 0;
 
 		this.bounciness = 1;
 		this.solid = false;
@@ -59,6 +62,7 @@ export default class PhysicalObject extends RenderObject {
 	}
 
 	public tick(): void {
+		this.currentTick++;
 		//Clear up the acceleration
 		this.acceleration.fill(0);
 		//Apply forces
