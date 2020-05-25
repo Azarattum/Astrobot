@@ -42,7 +42,7 @@ export default class Game extends Controller<"">() {
 
 		const bot0 = new Bot(scene);
 		bot0.brain.load("assets/model_cc_6000.json");
-		bot0.color = [234, 241, 254];
+		bot0.color = [134, 141, 154];
 
 		const bot1 = new Bot(scene);
 		bot1.brain.load("assets/model_cc_10k.json");
@@ -66,7 +66,7 @@ export default class Game extends Controller<"">() {
 		this.scene.objects.push(this.player);
 
 		this.render();
-		setInterval(this.tick.bind(this), 30);
+		setInterval(this.tick.bind(this), 20);
 
 		this.expose("render", () => {
 			this.scene?.render();
