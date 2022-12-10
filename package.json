@@ -6,7 +6,7 @@
 		"watch": "node_modules/.bin/webpack-cli -d -w"
 	},
 	"dependencies": {
-		"@tensorflow/tfjs": "^1.7.4"
+		"@tensorflow/tfjs": "^4.1.0"
 	},
 	"devDependencies": {
 		"@babel/compat-data": "^7.9.6",
