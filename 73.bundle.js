@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{370:function(t,e,n){"use strict";n.d(e,"a",(function(){return u}));var a=n(3),c=n(19),r=n(10),s=n(135);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[73],{137:function(e,n,t){"use strict";
 /**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
@@ -15,7 +15,72 @@
  * limitations under the License.
  * =============================================================================
  */
-const u={kernelName:a.a,inputsToSave:["x"],gradFunc:(t,e)=>{const[n]=e;return{x:()=>Object(r.a)(t,Object(s.a)(Object(c.a)(n,"float32"),-1))}}}},601:function(t,e,n){"use strict";n.d(e,"a",(function(){return d}));var a=n(3),c=n(19),r=n(24),s=n(49),u=n(27),o=n(66),i=n(41),b=n(23);
+function a(e){const{inputs:n,backend:t}=e,{input:a}=n,c=t.data.get(a.dataId).complexTensorInfos.imag,r=t.data.get(c.dataId).values;return t.makeTensorInfo(c.shape,c.dtype,r)}t.d(n,"a",(function(){return a})),t.d(n,"b",(function(){return c}));const c={kernelName:t(0).ub,backendName:"cpu",kernelFunc:a}},245:function(e,n,t){"use strict";t.d(n,"a",(function(){return c})),t.d(n,"b",(function(){return r}));var a=t(0);
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */function c(e){const{backend:n,attrs:t}=e,{shape:c,value:r,dtype:s}=t,o=s||a.Hf.inferDtype(r),u=a.Hf.getArrayFromDType(o,a.Hf.sizeFromShape(c));return function(e,n,t){e.fill(n)}(u,r),n.makeTensorInfo(c,o,u)}const r={kernelName:a.gb,backendName:"cpu",kernelFunc:c}},324:function(e,n,t){"use strict";t.d(n,"b",(function(){return s})),t.d(n,"a",(function(){return u}));var a=t(0),c=t(94),r=t(29);
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */
+const s=Object(c.a)(e=>Math.floor(e)),o=Object(r.b)(a.ib,s),u={kernelName:a.ib,backendName:"cpu",kernelFunc:o}},325:function(e,n,t){"use strict";t.d(n,"a",(function(){return c}));var a=t(0);
+/**
+ * @license
+ * Copyright 2021 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */function c(e,n,t,c,r,s,o,u,i){const d=Object(a.Hd)([c,s],t);for(let t=0;t<c;t++){const a=[];let c=0;for(let n=0;n<r;n++){const s=e[t*r+n];c+=s*o[n],a.push(s)}if(c<0||c>=i/s)throw new Error(`Invalid indices: ${a} does not index into ${u}`);for(let e=0;e<s;e++)d.values[t*s+e]=n.get(...n.indexToLoc(c*s+e))}return d}},326:function(e,n,t){"use strict";t.d(n,"a",(function(){return c}));var a=t(0);
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */function c(e,n,t){const c=Object(a.Hd)(t,e.dtype);for(let t=0;t<c.size;++t){const a=c.indexToLoc(t).slice(),r=a[0],s=a[2],o=n.locToIndex([r,s]);a[2]=n.values[o];const u=e.locToIndex(a);0<=u&&u<e.values.length&&(c.values[t]=e.values[u])}return c}},327:function(e,n,t){"use strict";t.d(n,"b",(function(){return s})),t.d(n,"a",(function(){return u}));var a=t(0),c=t(46),r=t(48);
 /**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
@@ -32,7 +97,7 @@ const u={kernelName:a.a,inputsToSave:["x"],gradFunc:(t,e)=>{const[n]=e;return{x:
  * limitations under the License.
  * =============================================================================
  */
-const d={kernelName:a.b,inputsToSave:["x"],gradFunc:(t,e)=>{const[n]=e;return{x:()=>{const e=Object(i.a)(Object(c.a)(n,"float32")),a=Object(o.a)(Object(b.a)(Object(u.a)(1),e));return Object(s.a)(Object(r.a)(t,a))}}}}},602:function(t,e,n){"use strict";n.d(e,"a",(function(){return i}));var a=n(3),c=n(19),r=n(24),s=n(66),u=n(41),o=n(23);
+const s=Object(c.a)((e,n)=>e>n?1:0),o=Object(r.a)(a.qb,s,null,"bool"),u={kernelName:a.qb,backendName:"cpu",kernelFunc:o}},328:function(e,n,t){"use strict";t.d(n,"b",(function(){return s})),t.d(n,"a",(function(){return u}));var a=t(0),c=t(46),r=t(48);
 /**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
@@ -49,7 +114,7 @@ const d={kernelName:a.b,inputsToSave:["x"],gradFunc:(t,e)=>{const[n]=e;return{x:
  * limitations under the License.
  * =============================================================================
  */
-const i={kernelName:a.c,inputsToSave:["x"],gradFunc:(t,e)=>{const[n]=e;return{x:()=>{const e=Object(s.a)(Object(o.a)(Object(u.a)(Object(c.a)(n,"float32")),1));return Object(r.a)(t,e)}}}}},603:function(t,e,n){"use strict";n.d(e,"a",(function(){return u}));var a=n(3),c=n(25),r=n(9),s=n(28);
+const s=Object(c.a)((e,n)=>e>=n?1:0),o=Object(r.a)(a.rb,s,null,"bool"),u={kernelName:a.rb,backendName:"cpu",kernelFunc:o}},329:function(e,n,t){"use strict";t.d(n,"b",(function(){return s})),t.d(n,"a",(function(){return u}));var a=t(0),c=t(46),r=t(48);
 /**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
@@ -66,7 +131,7 @@ const i={kernelName:a.c,inputsToSave:["x"],gradFunc:(t,e)=>{const[n]=e;return{x:
  * limitations under the License.
  * =============================================================================
  */
-const u={kernelName:a.d,inputsToSave:["a","b"],gradFunc:(t,e)=>{const[n,a]=e,u=c.assertAndGetBroadcastShape(n.shape,a.shape);return{a:()=>{let e=t;const a=c.getReductionAxes(n.shape,u);return a.length>0&&(e=Object(s.a)(e,a)),Object(r.a)(e,n.shape)},b:()=>{let e=t;const n=c.getReductionAxes(a.shape,u);return n.length>0&&(e=Object(s.a)(e,n)),Object(r.a)(e,a.shape)}}}}},604:function(t,e,n){"use strict";n.d(e,"a",(function(){return a}));
+const s=Object(c.a)((e,n)=>e<n?1:0),o=Object(r.a)(a.Cb,s,null,"bool"),u={kernelName:a.Cb,backendName:"cpu",kernelFunc:o}},330:function(e,n,t){"use strict";t.d(n,"b",(function(){return s})),t.d(n,"a",(function(){return u}));var a=t(0),c=t(46),r=t(48);
 /**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
@@ -83,10 +148,10 @@ const u={kernelName:a.d,inputsToSave:["a","b"],gradFunc:(t,e)=>{const[n,a]=e,u=c
  * limitations under the License.
  * =============================================================================
  */
-const a={kernelName:n(3).e,saveAllInputs:!0,gradFunc:(t,e)=>{const n={};return e.forEach((e,a)=>{n[a]=()=>t.clone()}),n}}},605:function(t,e,n){"use strict";n.d(e,"a",(function(){return r}));var a=n(3),c=n(32);
+const s=Object(c.a)((e,n)=>e<=n?1:0),o=Object(r.a)(a.Db,s,null,"bool"),u={kernelName:a.Db,backendName:"cpu",kernelFunc:o}},331:function(e,n,t){"use strict";t.d(n,"a",(function(){return c}));var a=t(0);
 /**
  * @license
- * Copyright 2020 Google Inc. All Rights Reserved.
+ * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -99,25 +164,24 @@ const a={kernelName:n(3).e,saveAllInputs:!0,gradFunc:(t,e)=>{const n={};return e
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */
-const r={kernelName:a.h,inputsToSave:["x"],gradFunc:(t,e)=>{const[n]=e;return{x:()=>Object(c.a)(n)}}}},606:function(t,e,n){"use strict";n.d(e,"a",(function(){return r}));var a=n(3),c=n(32);
+ */function c(e,n,t){const c=(n-e)/(t-1),r=a.Hf.makeZerosTypedArray(t,"float32");r[0]=e;for(let e=1;e<r.length;e++)r[e]=r[e-1]+c;return r}},332:function(e,n,t){"use strict";t.d(n,"b",(function(){return s})),t.d(n,"a",(function(){return u}));var a=t(0),c=t(94),r=t(29);
 /**
  * @license
- * Copyright 2020 Google Inc. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an AS IS BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
  */
-const r={kernelName:a.i,inputsToSave:["x"],gradFunc:(t,e)=>{const[n]=e;return{x:()=>Object(c.a)(n)}}}},607:function(t,e,n){"use strict";n.d(e,"a",(function(){return b}));var a=n(3),c=n(19),r=n(24),s=n(27),u=n(66),o=n(41),i=n(23);
+const s=Object(c.a)(e=>Math.log(e)),o=Object(r.b)(a.Fb,s),u={kernelName:a.Fb,backendName:"cpu",kernelFunc:o}},382:function(e,n,t){"use strict";t.d(n,"a",(function(){return r})),t.d(n,"b",(function(){return s}));var a=t(0),c=t(14);
 /**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
@@ -134,7 +198,7 @@ const r={kernelName:a.i,inputsToSave:["x"],gradFunc:(t,e)=>{const[n]=e;return{x:
  * limitations under the License.
  * =============================================================================
  */
-const b={kernelName:a.j,inputsToSave:["x"],gradFunc:(t,e)=>{const[n]=e;return{x:()=>Object(r.a)(t,Object(u.a)(Object(i.a)(Object(s.a)(1),Object(o.a)(Object(c.a)(n,"float32")))))}}}},608:function(t,e,n){"use strict";n.d(e,"a",(function(){return b}));var a=n(3),c=n(22),r=n(19),s=n(24),u=n(27),o=n(66),i=n(41);
+function r(e){const{inputs:n,backend:t,attrs:r}=e,{x:s}=n,{alpha:o}=r;Object(c.a)([s],"leakyRelu");const u=a.Hf.sizeFromShape(s.shape),i=t.data.get(s.dataId).values,d=a.Hf.getTypedArrayFromDType("float32",u);for(let e=0;e<i.length;e++)d[e]=i[e]<0?o*i[e]:i[e];return t.makeTensorInfo(s.shape,"float32",d)}const s={kernelName:a.Bb,backendName:"cpu",kernelFunc:r}},808:function(e,n,t){"use strict";t.d(n,"a",(function(){return s}));var a=t(0),c=t(385),r=t(45);const s={kernelName:a.fb,backendName:"cpu",kernelFunc:
 /**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
@@ -151,7 +215,23 @@ const b={kernelName:a.j,inputsToSave:["x"],gradFunc:(t,e)=>{const[n]=e;return{x:
  * limitations under the License.
  * =============================================================================
  */
-const b={kernelName:a.k,inputsToSave:["x"],gradFunc:(t,e)=>{const[n]=e;return{x:()=>{const e=Object(o.a)(Object(c.a)(Object(u.a)(1),Object(i.a)(Object(r.a)(n,"float32"))));return Object(s.a)(t,e)}}}}},609:function(t,e,n){"use strict";n.d(e,"a",(function(){return j}));var a=n(3),c=n(22),r=n(25),s=n(24),u=n(10),o=n(49),i=n(9),b=n(41),d=n(28);
+function(e){const{inputs:n,backend:t}=e,{input:s}=n,o=a.Hf.sizeFromShape(s.shape),u=s.shape[s.shape.length-1],i=o/u,d=Object(r.a)({inputs:{x:s},backend:t,attrs:{shape:[i,u]}}),b=Object(c.a)(d,!1,t),l=Object(r.a)({inputs:{x:b},backend:t,attrs:{shape:s.shape}});return t.disposeIntermediateTensorInfo(d),t.disposeIntermediateTensorInfo(b),l}}},809:function(e,n,t){"use strict";t.d(n,"a",(function(){return c}));var a=t(0);
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */const c={kernelName:a.hb,backendName:"cpu",kernelFunc:({inputs:e,attrs:n,backend:t})=>{const{image:c}=e,r=t,s=a.Hf.getTypedArrayFromDType(c.dtype,a.Hf.sizeFromShape(c.shape)),[o,u,i,d]=c.shape,b=r.data.get(c.dataId).values;for(let e=0;e<o;e++){const n=e*i*u*d;for(let e=0;e<u;e++){const t=e*(i*d);for(let e=0;e<i;e++){const a=e*d;for(let c=0;c<d;c++){const r=Math.round(i-e-1),o=n+t+a+c;let u=b[o];if(r>=0&&r<i){u=b[n+t+r*d+c]}s[o]=u}}}}return{dataId:r.write(s,c.shape,c.dtype),shape:c.shape,dtype:c.dtype}}}},81:function(e,n,t){"use strict";
 /**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
@@ -168,7 +248,7 @@ const b={kernelName:a.k,inputsToSave:["x"],gradFunc:(t,e)=>{const[n]=e;return{x:
  * limitations under the License.
  * =============================================================================
  */
-const j={kernelName:a.m,inputsToSave:["a","b"],gradFunc:(t,e)=>{const[n,a]=e,j=Object(r.assertAndGetBroadcastShape)(n.shape,a.shape);return{a:()=>{const e=Object(c.a)(Object(b.a)(n),Object(b.a)(a));let o=Object(u.a)(t,Object(s.a)(a,e));const O=Object(r.getReductionAxes)(n.shape,j);return O.length>0&&(o=Object(d.a)(o,O)),Object(i.a)(o,n.shape)},b:()=>{const e=Object(c.a)(Object(b.a)(n),Object(b.a)(a));let O=Object(o.a)(Object(u.a)(t,Object(s.a)(n,e)));const f=Object(r.getReductionAxes)(a.shape,j);return f.length>0&&(O=Object(d.a)(O,f)),Object(i.a)(O,a.shape)}}}}},610:function(t,e,n){"use strict";n.d(e,"a",(function(){return o}));var a=n(3),c=n(22),r=n(19),s=n(24),u=n(41);
+function a(e){const{inputs:n,backend:t}=e,{x:a}=n;return t.incRef(a.dataId),{dataId:a.dataId,shape:a.shape,dtype:a.dtype}}t.d(n,"a",(function(){return a})),t.d(n,"b",(function(){return c}));const c={kernelName:t(0).tb,backendName:"cpu",kernelFunc:a}},810:function(e,n,t){"use strict";t.d(n,"a",(function(){return u}));var a=t(0),c=t(46),r=t(48);
 /**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
@@ -185,7 +265,7 @@ const j={kernelName:a.m,inputsToSave:["a","b"],gradFunc:(t,e)=>{const[n,a]=e,j=O
  * limitations under the License.
  * =============================================================================
  */
-const o={kernelName:a.l,inputsToSave:["x"],gradFunc:(t,e)=>{const[n]=e;return{x:()=>Object(s.a)(t,Object(c.a)(Object(u.a)(Object(r.a)(n,"float32")),1))}}}},611:function(t,e,n){"use strict";n.d(e,"a",(function(){return i}));var a=n(3),c=n(19),r=n(24),s=n(41),u=n(23),o=n(27);
+const s=Object(c.a)((e,n)=>Math.floor(e/n)),o=Object(r.a)(a.jb,s,null,"int32"),u={kernelName:a.jb,backendName:"cpu",kernelFunc:o}},811:function(e,n,t){"use strict";t.d(n,"a",(function(){return u}));var a=t(0),c=t(201),r=t(116),s=t(383),o=t(45);const u={kernelName:a.mb,backendName:"cpu",kernelFunc:
 /**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
@@ -202,7 +282,7 @@ const o={kernelName:a.l,inputsToSave:["x"],gradFunc:(t,e)=>{const[n]=e;return{x:
  * limitations under the License.
  * =============================================================================
  */
-const i={kernelName:a.n,inputsToSave:["x"],gradFunc:(t,e)=>{const[n]=e;return{x:()=>Object(r.a)(t,Object(u.a)(Object(o.a)(1),Object(s.a)(Object(c.a)(n,"float32"))))}}}},612:function(t,e,n){"use strict";n.d(e,"a",(function(){return r}));var a=n(3),c=n(613);
+function(e){const{inputs:n,backend:t,attrs:a}=e,{x:u,filter:i,bias:d,preluActivationWeights:b}=n,{strides:l,pad:p,dataFormat:f,dilations:k,dimRoundingMode:m,activation:h,leakyreluAlpha:N}=a;let v=Object(s.a)({inputs:{x:u,filter:i},backend:t,attrs:{strides:l,pad:p,dataFormat:f,dilations:k,dimRoundingMode:m}});if(d){const e=v;if("NCHW"===f&&1===d.shape.length&&1!==d.shape[0]){const e=Object(o.a)({inputs:{x:d},backend:t,attrs:{shape:[d.shape[0],1,1]}});v=Object(r.a)({inputs:{a:v,b:e},backend:t}),t.disposeIntermediateTensorInfo(e)}else v=Object(r.a)({inputs:{a:v,b:d},backend:t});t.disposeIntermediateTensorInfo(e)}if(h){const e=v;if("NCHW"===f&&"prelu"===h&&1===b.shape.length&&1!==b.shape[0]){const e=Object(o.a)({inputs:{x:b},backend:t,attrs:{shape:[b.shape[0],1,1]}});v=Object(c.a)(t,v,h,e,N),t.disposeIntermediateTensorInfo(e)}else v=Object(c.a)(t,v,h,b,N);t.disposeIntermediateTensorInfo(e)}return v}}},812:function(e,n,t){"use strict";t.d(n,"a",(function(){return o}));var a=t(0),c=t(201),r=t(116),s=t(384);const o={kernelName:a.nb,backendName:"cpu",kernelFunc:
 /**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
@@ -219,7 +299,7 @@ const i={kernelName:a.n,inputsToSave:["x"],gradFunc:(t,e)=>{const[n]=e;return{x:
  * limitations under the License.
  * =============================================================================
  */
-const r={kernelName:a.p,inputsToSave:["x"],gradFunc:(t,e,n)=>{const[a]=e,{filterSize:r,strides:s,pad:u,dimRoundingMode:o}=n;return{x:()=>Object(c.a)(t,a,r,s,u,o)}}}},614:function(t,e,n){"use strict";n.d(e,"a",(function(){return r}));var a=n(3),c=n(615);
+function(e){const{inputs:n,backend:t,attrs:a}=e,{x:o,filter:u,bias:i,preluActivationWeights:d}=n,{strides:b,pad:l,dataFormat:p,dilations:f,dimRoundingMode:k,activation:m,leakyreluAlpha:h}=a;let N=Object(s.a)({inputs:{x:o,filter:u},backend:t,attrs:{strides:b,pad:l,dataFormat:p,dilations:f,dimRoundingMode:k}});if(i){const e=N;N=Object(r.a)({inputs:{a:N,b:i},backend:t}),t.disposeIntermediateTensorInfo(e)}if(m){const e=N;N=Object(c.a)(t,N,m,d,h),t.disposeIntermediateTensorInfo(e)}return N}}},813:function(e,n,t){"use strict";t.d(n,"a",(function(){return r}));var a=t(0),c=t(325);const r={kernelName:a.ob,backendName:"cpu",kernelFunc:
 /**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
@@ -236,7 +316,7 @@ const r={kernelName:a.p,inputsToSave:["x"],gradFunc:(t,e,n)=>{const[a]=e,{filter
  * limitations under the License.
  * =============================================================================
  */
-const r={kernelName:a.o,inputsToSave:["x"],gradFunc:(t,e,n)=>{const[a]=e,{filterSize:r,strides:s,pad:u}=n;return{x:()=>Object(c.a)(t,a,r,s,u)}}}},616:function(t,e,n){"use strict";n.d(e,"a",(function(){return r}));var a=n(3),c=n(43);
+function(e){const{inputs:n,backend:t}=e,{params:r,indices:s}=n,o=a.Hf.sizeFromShape(r.shape),u=s.shape,i=u[u.length-1],[d,b,l,p]=a.Ad.prepareAndValidate(r,s);if(0===b)return t.makeTensorInfo(d,r.dtype,[]);const f=t.data.get(s.dataId).values,k=t.bufferSync(r),m=Object(c.a)(f,k,r.dtype,b,i,l,p,r.shape,o);return t.makeTensorInfo(d,r.dtype,m.values)}}},814:function(e,n,t){"use strict";t.d(n,"a",(function(){return o}));var a=t(0),c=t(14),r=t(326),s=t(45);const o={kernelName:a.pb,backendName:"cpu",kernelFunc:
 /**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
@@ -253,7 +333,7 @@ const r={kernelName:a.o,inputsToSave:["x"],gradFunc:(t,e,n)=>{const[a]=e,{filter
  * limitations under the License.
  * =============================================================================
  */
-const r={kernelName:a.s,inputsToSave:["a","b"],gradFunc:(t,e,n)=>{const[a,r]=e,{transposeA:s,transposeB:u}=n;return s||u?!s&&u?{a:()=>Object(c.a)(t,r,!1,!1),b:()=>Object(c.a)(t,a,!0,!1)}:s&&!u?{a:()=>Object(c.a)(r,t,!1,!0),b:()=>Object(c.a)(a,t,!1,!1)}:{a:()=>Object(c.a)(r,t,!0,!0),b:()=>Object(c.a)(t,a,!0,!0)}:{a:()=>Object(c.a)(t,r,!1,!0),b:()=>Object(c.a)(a,t,!0,!1)}}}},617:function(t,e,n){"use strict";n.d(e,"a",(function(){return r}));var a=n(3),c=n(175);
+function(e){const{inputs:n,backend:t,attrs:o}=e,{x:u,indices:i}=n,{axis:d,batchDims:b}=o;Object(c.a)([u,i],"gatherV2");const l=a.Hf.parseAxisParam(d,u.shape)[0],p=t.data.get(i.dataId).values,f=u.shape[l];for(let e=0;e<p.length;++e){const n=p[e];a.Hf.assert(n<=f-1&&n>=0,()=>`GatherV2: the index value ${n} is not in [0, ${f-1}]`)}let k=b;null==b&&(k=0);const m=a.Hf.sizeFromShape(i.shape),h=a.Ad.segment_util.collectGatherOpShapeInfo(u,i,l,k),N=Object(s.a)({inputs:{x:u},backend:t,attrs:{shape:[h.batchSize,h.outerSize,h.dimSize,h.sliceSize]}}),v=Object(s.a)({inputs:{x:i},backend:t,attrs:{shape:[h.batchSize,m/h.batchSize]}}),I=[h.batchSize,h.outerSize,m/h.batchSize,h.sliceSize],j=t.bufferSync(v),O=t.bufferSync(N),F=Object(r.a)(O,j,I);return t.disposeIntermediateTensorInfo(N),t.disposeIntermediateTensorInfo(v),t.makeTensorInfo(h.outputShape,F.dtype,F.values)}}},815:function(e,n,t){"use strict";t.d(n,"a",(function(){return s}));var a=t(0),c=t(385),r=t(45);const s={kernelName:a.sb,backendName:"cpu",kernelFunc:
 /**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
@@ -270,7 +350,58 @@ const r={kernelName:a.s,inputsToSave:["a","b"],gradFunc:(t,e,n)=>{const[a,r]=e,{
  * limitations under the License.
  * =============================================================================
  */
-const r={kernelName:a.t,gradFunc:(t,e,n)=>{const{blockShape:a,crops:r}=n;return{x:()=>Object(c.a)(t,a,r)}}}},618:function(t,e,n){"use strict";n.d(e,"a",(function(){return r}));var a=n(3),c=n(28);
+function(e){const{inputs:n,backend:t}=e,{input:s}=n,o=a.Hf.sizeFromShape(s.shape),u=s.shape[s.shape.length-1],i=o/u,d=Object(r.a)({inputs:{x:s},backend:t,attrs:{shape:[i,u]}}),b=Object(c.a)(d,!0,t),l=Object(r.a)({inputs:{x:b},backend:t,attrs:{shape:s.shape}});return t.disposeIntermediateTensorInfo(d),t.disposeIntermediateTensorInfo(b),l}}},816:function(e,n,t){"use strict";t.d(n,"a",(function(){return s}));var a=t(0),c=t(29);
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */
+const r=Object(c.a)(a.vb,e=>Number.isFinite(e)?1:0,"bool"),s={kernelName:a.vb,backendName:"cpu",kernelFunc:r}},817:function(e,n,t){"use strict";t.d(n,"a",(function(){return s}));var a=t(0),c=t(29);
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */
+const r=Object(c.a)(a.wb,e=>Math.abs(e)===1/0?1:0,"bool"),s={kernelName:a.wb,backendName:"cpu",kernelFunc:r}},818:function(e,n,t){"use strict";t.d(n,"a",(function(){return s}));var a=t(0),c=t(29);
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */
+const r=Object(c.a)(a.xb,e=>Number.isNaN(e)?1:0,"bool"),s={kernelName:a.xb,backendName:"cpu",kernelFunc:r}},819:function(e,n,t){"use strict";t.d(n,"a",(function(){return r}));var a=t(0),c=t(331);const r={kernelName:a.Eb,backendName:"cpu",kernelFunc:
 /**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
@@ -287,7 +418,24 @@ const r={kernelName:a.t,gradFunc:(t,e,n)=>{const{blockShape:a,crops:r}=n;return{
  * limitations under the License.
  * =============================================================================
  */
-const r={kernelName:a.w,gradFunc:(t,e,n)=>{const a=n,r=a.inputShape,s=a.shape,u=Array.from(s);for(let t=r.length-1;t>=0;t--)if(r[t]===s[t])u[t]=1;else if(1!==r[t])throw new Error(`broadcastTo(): [${r}] cannot be broadcast to [${s}].`);const o=[];for(let t=0;t<u.length;t++)u[t]>1&&o.push(t);return{x:()=>Object(c.a)(t,o,!0)}}}},619:function(t,e,n){"use strict";n.d(e,"a",(function(){return a}));
+function(e){const{backend:n,attrs:t}=e,{start:a,stop:r,num:s}=t,o=Object(c.a)(a,r,s);return n.makeTensorInfo([o.length],"float32",o)}}},820:function(e,n,t){"use strict";t.d(n,"a",(function(){return s}));var a=t(0),c=t(29);
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */
+const r=Object(c.a)(a.Gb,e=>Math.log1p(e)),s={kernelName:a.Gb,backendName:"cpu",kernelFunc:r}},821:function(e,n,t){"use strict";t.d(n,"a",(function(){return u}));var a=t(0),c=t(46),r=t(48);
 /**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
@@ -304,7 +452,24 @@ const r={kernelName:a.w,gradFunc:(t,e,n)=>{const a=n,r=a.inputShape,s=a.shape,u=
  * limitations under the License.
  * =============================================================================
  */
-const a={kernelName:n(3).x,gradFunc:t=>({x:()=>t.clone()})}},620:function(t,e,n){"use strict";n.d(e,"a",(function(){return r}));var a=n(3),c=n(32);
+const s=Object(c.a)((e,n)=>e&&n),o=Object(r.a)(a.Hb,s,null,"bool"),u={kernelName:a.Hb,backendName:"cpu",kernelFunc:o}},822:function(e,n,t){"use strict";t.d(n,"a",(function(){return s}));var a=t(0),c=t(29);
+/**
+ * @license
+ * Copyright 2020 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the License);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */
+const r=Object(c.a)(a.Ib,e=>e?0:1,"bool"),s={kernelName:a.Ib,backendName:"cpu",kernelFunc:r}},823:function(e,n,t){"use strict";t.d(n,"a",(function(){return u}));var a=t(0),c=t(46),r=t(48);
 /**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
@@ -321,7 +486,7 @@ const a={kernelName:n(3).x,gradFunc:t=>({x:()=>t.clone()})}},620:function(t,e,n)
  * limitations under the License.
  * =============================================================================
  */
-const r={kernelName:a.y,gradFunc:t=>({x:()=>Object(c.a)(t)})}},621:function(t,e,n){"use strict";n.d(e,"a",(function(){return i}));var a=n(3),c=n(124),r=n(106),s=n(113),u=n(64),o=n(32);
+const s=Object(c.a)((e,n)=>e||n),o=Object(r.a)(a.Jb,s,null,"bool"),u={kernelName:a.Jb,backendName:"cpu",kernelFunc:o}},824:function(e,n,t){"use strict";t.d(n,"a",(function(){return r}));var a=t(0),c=t(14);const r={kernelName:a.zb,backendName:"cpu",kernelFunc:
 /**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
@@ -338,7 +503,7 @@ const r={kernelName:a.y,gradFunc:t=>({x:()=>Object(c.a)(t)})}},621:function(t,e,
  * limitations under the License.
  * =============================================================================
  */
-const i={kernelName:a.z,inputsToSave:["x"],gradFunc:(t,e,n)=>{const[a]=e,{clipValueMin:i,clipValueMax:b}=n;return{x:()=>Object(u.a)(Object(s.a)(Object(c.a)(a,i),Object(r.a)(a,b)),t,Object(o.a)(t))}}}},622:function(t,e,n){"use strict";n.d(e,"a",(function(){return r}));var a=n(3),c=n(370);
+function(e){const{inputs:n,backend:t,attrs:r}=e,{x:s}=n,{depthRadius:o,bias:u,alpha:i,beta:d}=r;Object(c.a)(s,"LRN");const b=s.shape[3],l=b-1,p=t.data.get(s.dataId).values,f=a.Hf.sizeFromShape(s.shape),k=new Float32Array(f);function m(e){const n=e%b;let t=e-n+Math.max(0,n-o);const a=e-n+Math.min(n+o,l);let c=0;for(;t<=a;t++){const e=p[t];c+=e*e}return c}for(let e=0;e<f;e++){const n=m(e),t=p[e]*Math.pow(u+i*n,-d);k[e]=t}return t.makeTensorInfo(s.shape,s.dtype,k)}}},825:function(e,n,t){"use strict";t.d(n,"a",(function(){return r}));var a=t(0),c=t(14);const r={kernelName:a.Ab,backendName:"cpu",kernelFunc:
 /**
  * @license
  * Copyright 2020 Google LLC. All Rights Reserved.
@@ -355,123 +520,4 @@ const i={kernelName:a.z,inputsToSave:["x"],gradFunc:(t,e,n)=>{const[a]=e,{clipVa
  * limitations under the License.
  * =============================================================================
  */
-const r={kernelName:a.B,inputsToSave:["x"],gradFunc:c.a.gradFunc}},623:function(t,e,n){"use strict";n.d(e,"a",(function(){return s}));var a=n(3),c=n(114),r=n(5);
-/**
- * @license
- * Copyright 2020 Google LLC. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * =============================================================================
- */
-const s={kernelName:a.C,saveAllInputs:!0,gradFunc:(t,e,n)=>{const a=e.map(t=>t.shape),{axis:s}=n,u=Object(r.I)(s,e[0].shape)[0],o=a.map(t=>t[u]);return Object(c.a)(t,o,u).map(t=>()=>t)}}},624:function(t,e,n){"use strict";n.d(e,"a",(function(){return s}));var a=n(3),c=n(123),r=n(244);
-/**
- * @license
- * Copyright 2020 Google LLC. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * =============================================================================
- */
-const s={kernelName:a.F,inputsToSave:["dy","filter"],gradFunc:(t,e,n)=>{const[a,s]=e,{strides:u,pad:o,dataFormat:i,dimRoundingMode:b}=n;return{dy:()=>Object(c.a)(t,s,u,o,i,1,b),filter:()=>Object(r.a)(t,a,s.shape,u,o,i,b)}}}},625:function(t,e,n){"use strict";n.d(e,"a",(function(){return o}));var a=n(3),c=n(244),r=n(242),s=n(37),u=n(5);
-/**
- * @license
- * Copyright 2020 Google LLC. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * =============================================================================
- */
-const o={kernelName:a.D,inputsToSave:["x","filter"],gradFunc:(t,e,n)=>{const[a,o]=e,{dilations:i,strides:b,pad:d,dataFormat:j}=n;return u.b(s.j(i),()=>`Error in gradient of conv2D: dilation rates greater than 1 are not yet supported in gradients. Got dilations '${i}'`),{x:()=>Object(r.a)(a.shape,t,o,b,d,j),filter:()=>Object(c.a)(a,t,o.shape,b,d,j)}}}},626:function(t,e,n){"use strict";n.d(e,"a",(function(){return o}));var a=n(3),c=n(627),r=n(363),s=n(37),u=n(5);
-/**
- * @license
- * Copyright 2020 Google LLC. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * =============================================================================
- */
-const o={kernelName:a.G,inputsToSave:["x","filter"],gradFunc:(t,e,n)=>{const{dilations:a,strides:o,pad:i}=n;u.b(Object(s.j)(a),()=>`Error in gradient of conv3D: dilation rates greater than 1 are not yet supported in gradients. Got dilations '${a}'`);const[b,d]=e;return{x:()=>Object(r.a)(b.shape,t,d,o,i),filter:()=>Object(c.a)(b,t,d.shape,o,i)}}}},628:function(t,e,n){"use strict";n.d(e,"a",(function(){return o}));var a=n(3),c=n(19),r=n(10),s=n(49),u=n(262);
-/**
- * @license
- * Copyright 2020 Google LLC. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * =============================================================================
- */
-const o={kernelName:a.J,inputsToSave:["x"],gradFunc:(t,e)=>{const[n]=e;return{x:()=>Object(r.a)(Object(s.a)(Object(u.a)(Object(c.a)(n,"float32"))),t)}}}},629:function(t,e,n){"use strict";n.d(e,"a",(function(){return u}));var a=n(3),c=n(19),r=n(10),s=n(263);
-/**
- * @license
- * Copyright 2020 Google LLC. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * =============================================================================
- */
-const u={kernelName:a.K,inputsToSave:["x"],gradFunc:(t,e)=>{const[n]=e;return{x:()=>Object(r.a)(Object(s.a)(Object(c.a)(n,"float32")),t)}}}},630:function(t,e,n){"use strict";n.d(e,"a",(function(){return u}));var a=n(3),c=n(72),r=n(214),s=n(89);
-/**
- * @license
- * Copyright 2020 Google LLC. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * =============================================================================
- */
-const u={kernelName:a.N,inputsToSave:["x"],gradFunc:(t,e,n)=>{const[a]=e,{axis:u,exclusive:o,reverse:i}=n;return{x:()=>{const e=Object(c.f)([u],a.rank);let n=Object(r.a)(t,u,o,!i);return null!=e&&(n=Object(s.a)(n,e)),n}}}}}}]);
+function(e){const{inputs:n,backend:t,attrs:r}=e,{x:s,y:o,dy:u}=n,{depthRadius:i,bias:d,alpha:b,beta:l}=r;Object(c.a)(u,"LRNGrad");const p=a.Hf.sizeFromShape(u.shape),f=u.shape[3],k=t.data.get(u.dataId).values,m=t.data.get(s.dataId).values,h=t.data.get(o.dataId).values,N=new Float32Array(p),v=p;for(let e=0;e<v;e++){const n=e%f,t=e-n+Math.max(0,n-i),a=e-n+Math.min(f,n+i+1);let c=0;for(let e=t;e<a;e++)c+=Math.pow(m[e],2);c=b*c+d;for(let n=t;n<a;n++){let t=-2*b*l*m[n]*h[e]/c;e===n&&(t+=Math.pow(c,-l)),t*=k[e],N[n]+=t}}return t.makeTensorInfo(u.shape,s.dtype,N)}}}}]);
